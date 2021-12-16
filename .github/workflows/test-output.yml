@@ -11,4 +11,4 @@ jobs:
 
       - run: |
           output=$(cat go)
-          echo "::notice::$output"
+          echo "::warning::$output"
