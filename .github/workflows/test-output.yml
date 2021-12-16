@@ -11,4 +11,4 @@ jobs:
 
       - run: |
           output=$(cat go | grep otp_campaign_2)
-          echo "::info::$output"
+          echo "::notice::$output"
