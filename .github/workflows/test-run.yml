@@ -9,4 +9,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ fromJSON(github.event.workflow_run) }}"
+      - run: |
+          echo "${{ github.event.workflow_run }}" >> workflow_run.json
+          echo "${{ github.event.event }}" >> event.json
+          cat workflow_run.json
+          cat event.json
