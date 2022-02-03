@@ -1,0 +1,15 @@
+name: Workflow Run
+
+on:
+  workflow_run:
+    workflows: [ Test Output ]
+  types: [ completed ]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "github.event: ${{ github.event }}"
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event_path: ${{ github.event_path }}"
