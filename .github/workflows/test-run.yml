@@ -10,7 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "${{ github.event.workflow_run.workflow_url }}"
-          echo "${{ github.event.workflow_run.repository.events_url }}"
-          echo "${{ github.event.workflow_run.head_repository.owner.events_url }}"
-          echo "${{ github.event.workflow_run.head_repository.events_url }}"
+          echo "${{ github.event.* }}"
