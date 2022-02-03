@@ -3,7 +3,7 @@ name: Workflow Run
 on:
   workflow_run:
     workflows: [ Test Output ]
-  types: [ completed ]
+    types: [ completed ]
 
 jobs:
   run:
