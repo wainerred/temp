@@ -9,7 +9,4 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "github.event: ${{ github.event }}"
-          echo "github.event_name: ${{ github.event_name }}"
-          echo "github.event_path: ${{ github.event_path }}"
+      - run: export
