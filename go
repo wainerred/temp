@@ -11,3 +11,5 @@ function ft:otpcam2() {
 function runCypressTests(){
   sh -c "$RUN_CMD cypress ${CYPRESS_CMD:-open}"
 }
+
+echo "test"
