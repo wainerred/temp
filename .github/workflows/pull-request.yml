@@ -1,0 +1,12 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  example:
+    uses: ohcnkk/temp/.github/workflows/reusable-workflow.yml@main
+    with:
+      username: ${{ github.actor }}
