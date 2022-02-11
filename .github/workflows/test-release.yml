@@ -18,7 +18,7 @@ jobs:
           cd literate-winner
           git fetch --all
           LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*') || true
-          echo $?
+          echo $LATEST_RELEASE
           #if [ $? -ne 0 ]; then
           #  echo "No release branch found and using default branch"
           #else
