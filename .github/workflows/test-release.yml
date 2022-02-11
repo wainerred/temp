@@ -15,12 +15,15 @@ jobs:
           path: literate-winner
 
       - run: |
-          cd literate-winner
-          git fetch --all
-          LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*') || true
-          if [ -z "$LATEST_RELEASE" ]; then
-            echo "No release branch found and using default branch"
-          else
-            echo "Using $LATEST_RELEASE branch"
-            git checkout --progress --force -B $LATEST_RELEASE refs/remotes/origin/$LATEST_RELEASE
-          fi
+          REPOS_DIR=(literate-winner)
+          for DIR in ${REPOS_DIR[@]}; do
+            cd $DIR
+            git fetch --all
+            LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
+            if [ -z "$LATEST_RELEASE" ]; then
+              echo "No release branch found for $DIR and using default branch"
+            else
+              echo "Using $LATEST_RELEASE branch for $DIR"
+              git checkout --progress --force -B $LATEST_RELEASE refs/remotes/origin/$LATEST_RELEASE
+            fi
+          done
