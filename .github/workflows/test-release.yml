@@ -16,6 +16,7 @@ jobs:
 
       - run: |
           cd literate-winner
+          git fetch --all
           git branch --remotes
           #LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
           #if [ $? -ne 0 ]; then
