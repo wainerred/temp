@@ -9,8 +9,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ohcnkk/literate-winner
+          path: literate-winner
+
       - run: |
-          git clone git@github.com:ohcnkk/literate-winner.git
           cd literate-winner
-          [[ git checkout ${{ github.ref_name }} || true
-          ls -ltr
+          LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
+          if [ $? -ne 0 ]; then
+            echo "No release branch found and using default branch"
+          else
+            echo "Using $LATEST_RELEASE branch"
+            git checkout --progress --force -B $LATEST_RELEASE refs/remotes/origin/$LATEST_RELEASE
+          fi
