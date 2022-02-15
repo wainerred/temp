@@ -14,11 +14,12 @@ jobs:
           repository: ohcnkk/literate-winner
           path: literate-winner
 
-      - run: |
+      - shell: bash
+        run: |
+          CURRENT_DIR=$(pwd)
           REPOS_DIR=(literate-winner)
           for DIR in ${REPOS_DIR[@]}; do
-            WORK_DIR="${{ github.workspace }}/$DIR"
-            cd $WORK_DIR
+            cd "$CURRENT_DIR/$DIR"
             git fetch --all
             LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
             if [ -z "$LATEST_RELEASE" ]; then
