@@ -17,7 +17,8 @@ jobs:
       - run: |
           REPOS_DIR=(literate-winner)
           for DIR in ${REPOS_DIR[@]}; do
-            cd $DIR
+            WORK_DIR="${{ github.workspace }}/$DIR"
+            cd $WORK_DIR
             git fetch --all
             LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
             if [ -z "$LATEST_RELEASE" ]; then
