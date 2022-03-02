@@ -18,6 +18,8 @@ jobs:
       - run: |
           echo "NEW_DIR is $NEW_DIR"
           ls -ltr $NEW_DIR
+          echo $BUILD >> $NEW_DIR/newfile
+          cat $NEW_DIR/newfile
         env:
           NEW_DIR: ${{ github.workspace }}/newdir
           BUILD: ${{ github.sha }}
