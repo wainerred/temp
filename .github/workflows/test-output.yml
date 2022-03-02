@@ -20,8 +20,9 @@ jobs:
           ls -ltr $NEW_DIR
         env:
           NEW_DIR: ${{ github.workspace }}/newdir
+          BUILD: ${{ github.sha }}
 
-  fail:
-    runs-on: ubuntu-latest
-    steps:
-      - run: exit 1
+#   fail:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: exit 1
