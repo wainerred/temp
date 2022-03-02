@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "main workflow"
+      
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - run: mkdir newdir && touch newfile
+      - run: |
+          echo "NEW_DIR is $NEW_DIR"
+          ls -ltr $NEW_DIR
+        env:
+          NEW_DIR: ${{ github.workspace }}/newdir
 
   fail:
     runs-on: ubuntu-latest
