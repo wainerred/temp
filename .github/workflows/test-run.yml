@@ -2,7 +2,7 @@ name: Workflow Run
 
 on:
   workflow_run:
-    workflows: [ Test Output ]
+    workflows: [ Test Output, Environment ]
     types: [ completed ]
 
 jobs:
@@ -25,3 +25,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "always step..."
+
+  download:
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: dev
+    environment:
+      name: dev
+      url: https://github.com
+    steps:
+      - name: Download Artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: environment.yml
+          workflow_conclusion: success
+          name: ${{ env.ENVIRONMENT }}
