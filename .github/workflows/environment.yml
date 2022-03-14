@@ -7,9 +7,11 @@ on:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: dev
       url: https://github.com
     steps:
       - name: Run
-        run: echo "Environment: ${{ environment }}"
+        run: echo ${{ environment }}
+      
