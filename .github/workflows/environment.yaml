@@ -1,0 +1,15 @@
+name: Environment
+
+on:
+  push:
+    branches: 
+    - main
+
+jobs:
+  deploy:
+    environment:
+      name: dev
+      url: https://github.com
+    steps:
+      - name: Run
+        run: echo "Environment: ${{ environment }}"
