@@ -2,7 +2,7 @@ name: Workflow Run
 
 on:
   workflow_run:
-    workflows: [ Test Output, Environment ]
+    workflows: [ Environment ]
     types: [ completed ]
 
 jobs:
