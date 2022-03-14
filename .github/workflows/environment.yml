@@ -8,13 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: dev
-    environment:
-      name: dev
-      url: https://github.com
     steps:
       - name: Run
-        run: echo ${ENV}
-        env:
-          ENV: ${{ env.ENVIRONMENT }}
+        run: echo dev >> file
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: dev
