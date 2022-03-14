@@ -8,10 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT: dev
     environment:
       name: dev
       url: https://github.com
     steps:
       - name: Run
-        run: echo ${{ job.deploy.environment }}
-      
+        run: echo ${ENV}
+        env:
+          ENV: ${{ env.ENVIRONMENT }}
