@@ -13,5 +13,5 @@ jobs:
       url: https://github.com
     steps:
       - name: Run
-        run: echo ${{ environment }}
+        run: echo ${{ env.environment }}
       
