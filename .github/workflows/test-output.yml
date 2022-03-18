@@ -26,11 +26,15 @@ jobs:
 
   anotations:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        container: [ foo, bar ]
     steps:
-      - run: echo "::notice::$FOO:$BAR"
+      - run: echo "::notice::$IMAGE:$TAG"
         env:
-          FOO: foo
-          BAR: bar
+          IMAGE: ${{ matrix.container }}
+          TAG: latest
 
 #   fail:
 #     runs-on: ubuntu-latest
