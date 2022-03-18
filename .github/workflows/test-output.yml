@@ -27,7 +27,7 @@ jobs:
   anotations:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "::notice file=test-output.yml::$FOO:$BAR"
+      - run: echo "::notice::$FOO:$BAR"
         env:
           FOO: foo
           BAR: bar
