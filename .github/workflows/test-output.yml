@@ -24,6 +24,13 @@ jobs:
           NEW_DIR: ${{ github.workspace }}/newdir
           BUILD: ${{ github.sha }}
 
+  anotations:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "::set-output name=action_fruit::strawberry"
+          echo "::debug::Set the Octocat variable"
+
 #   fail:
 #     runs-on: ubuntu-latest
 #     steps:
