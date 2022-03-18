@@ -27,7 +27,10 @@ jobs:
   anotations:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+      - run: echo "::notice file=test-output.yml::$FOO:$BAR"
+        env:
+          FOO: foo
+          BAR: bar
 
 #   fail:
 #     runs-on: ubuntu-latest
