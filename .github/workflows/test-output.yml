@@ -27,9 +27,7 @@ jobs:
   anotations:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "::set-output name=action_fruit::strawberry"
-          echo "::debug::Set the Octocat variable"
+      - run: echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
 
 #   fail:
 #     runs-on: ubuntu-latest
