@@ -35,6 +35,11 @@ jobs:
         env:
           IMAGE: ${{ matrix.container }}
           TAG: latest
+          
+  reusable-workflow:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      username: ${{ github.actor }}
 
 #   fail:
 #     runs-on: ubuntu-latest
