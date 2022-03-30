@@ -15,4 +15,4 @@ jobs:
           echo "username: ${{ inputs.username }}"
           echo "IMAGE_TAG: ${IMAGE_TAG}"
     env:
-      IMAGE_TAG: ${{ github.run_id }}.0${{ github.run_number }}
+      IMAGE_TAG: ${{ github.run_id }}.0${{ github.run_number }}.${{ github.run_number }}
