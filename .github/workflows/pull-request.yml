@@ -7,6 +7,6 @@ on:
 
 jobs:
   example:
-    uses: ohcnkk/temp/.github/workflows/reusable-workflow.yml@main
+    uses: ./.github/workflows/reusable-workflow.yml
     with:
       username: ${{ github.actor }}
