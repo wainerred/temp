@@ -18,13 +18,13 @@ jobs:
     steps:
       - run: sleep 10
 
-  always:
-    needs: [sleep]
-    if: always()
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "always step..."
+#   always:
+#     needs: [sleep]
+#     if: always()
+#     continue-on-error: true
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "always step..."
 
   download:
     runs-on: ubuntu-latest
