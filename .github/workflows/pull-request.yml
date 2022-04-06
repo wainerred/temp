@@ -8,10 +8,10 @@ on:
     types: [submitted]
 
 jobs:
-  example:
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      username: ${{ github.actor }}
+#   example:
+#     uses: ./.github/workflows/reusable-workflow.yml
+#     with:
+#       username: ${{ github.actor }}
 
   approved:
     if: |
