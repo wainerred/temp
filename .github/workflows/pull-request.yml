@@ -4,9 +4,19 @@ on:
   pull_request:
     branches:
       - main
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   example:
     uses: ./.github/workflows/reusable-workflow.yml
     with:
       username: ${{ github.actor }}
+
+  approved:
+    if: |
+      (github.ref == 'refs/heads/master' && github.event_name == 'push') ||
+      (github.event.review.state == 'approved')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This PR was approved"
