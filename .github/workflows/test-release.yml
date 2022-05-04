@@ -1,0 +1,32 @@
+name: Test Release
+
+on:
+  push:
+    branches:
+    - 'release/20[0-9]+.[0-9]+.[0-9]+'
+    - 'hotfix/20[0-9]+.[0-9]+.[0-9]+_[0-9]+'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ohcnkk/literate-winner
+          path: literate-winner
+
+      - shell: bash
+        run: |
+          CURRENT_DIR=$(pwd)
+          REPOS_DIR=(literate-winner)
+          for DIR in ${REPOS_DIR[@]}; do
+            cd "$CURRENT_DIR/$DIR"
+            git fetch --all
+            LATEST_RELEASE=$(git branch --remotes --sort=-committerdate | grep 'release/' | head -n 1 | grep -o 'release.*')
+            if [ -z "$LATEST_RELEASE" ]; then
+              echo "=== No release branch found for $DIR and using default branch ==="
+            else
+              echo "=== Using $LATEST_RELEASE branch for $DIR ==="
+              git checkout --progress --force -B $LATEST_RELEASE refs/remotes/origin/$LATEST_RELEASE
+            fi
+          done
