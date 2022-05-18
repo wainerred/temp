@@ -41,7 +41,7 @@ jobs:
     with:
       username: ${{ github.actor }}
 
-  fail:
-    runs-on: ubuntu-latest
-    steps:
-      - run: exit 1
+#   fail:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: exit 1
