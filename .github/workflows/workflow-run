@@ -1,0 +1,12 @@
+name: Workflow Run
+
+on:
+  workflow_run:
+    workflows: [ 'Test Output' ]
+    types: [ completed ]
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "workflow_id: ${{ github.event.workflow_run.workflow_id }}"
