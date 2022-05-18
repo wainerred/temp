@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.event.* }}"
-      - run: echo "workflow_id: ${{ github.event.workflow_run.workflow_id }}"
+      - run: echo "workflow_id ${{ github.event.workflow_run.workflow_id }}"
 
   sleep:
     needs: [run]
