@@ -12,12 +12,14 @@ jobs:
     steps:
       - run: echo "${{ github.event.* }}"
       - run: echo "workflow_id ${{ github.event.workflow_run.workflow_id }}"
+      - run: echo "github.ref_name is ${{ github.ref_name }}"
+      - run: echo "GITHUB_REF_NAME is ${GITHUB_REF_NAME}"
 
-  sleep:
-    needs: [run]
-    runs-on: ubuntu-latest
-    steps:
-      - run: sleep 10
+#   sleep:
+#     needs: [run]
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: sleep 10
 
 #   always:
 #     needs: [sleep]
