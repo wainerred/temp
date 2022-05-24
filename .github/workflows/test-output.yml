@@ -46,13 +46,13 @@ jobs:
 #     steps:
 #       - run: exit 1
 
-  windows:
-    runs-on: windows-2019
-    steps:
-      - shell: pwsh
-        run: |
-          Install-Module -Name AWS.Tools.Installer -Force
-          Install-AWSToolsModule AWS.Tools.EC2 -Force
-          $Filter = @{ Name="name"; Values="Windows_Server-2019-English-Full-Base*" }
-          $Ec2Images = Get-EC2Image -Owner '801119661308' -Filter $Filter
-          packer version
+#   windows:
+#     runs-on: windows-2019
+#     steps:
+#       - shell: pwsh
+#         run: |
+#           Install-Module -Name AWS.Tools.Installer -Force
+#           Install-AWSToolsModule AWS.Tools.EC2 -Force
+#           $Filter = @{ Name="name"; Values="Windows_Server-2019-English-Full-Base*" }
+#           $Ec2Images = Get-EC2Image -Owner '801119661308' -Filter $Filter
+#           packer version
