@@ -14,6 +14,7 @@ jobs:
       - run: echo "workflow_id ${{ github.event.workflow_run.workflow_id }}"
       - run: echo "github.ref_name is ${{ github.ref_name }}"
       - run: echo "GITHUB_REF_NAME is ${GITHUB_REF_NAME}"
+      - run: echo "workflow_run head_branch ${{ github.event.workflow_run.head_branch }}"
 
 #   sleep:
 #     needs: [run]
