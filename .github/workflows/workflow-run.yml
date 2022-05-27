@@ -3,18 +3,20 @@ name: Workflow Run
 on:
   workflow_run:
     workflows: [ Environment ]
-    types: [ completed ]
+    types:
+      - requested
+      - completed
 
 jobs:
   run:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.* }}"
-      - run: echo "workflow_id ${{ github.event.workflow_run.workflow_id }}"
-      - run: echo "github.ref_name is ${{ github.ref_name }}"
-      - run: echo "GITHUB_REF_NAME is ${GITHUB_REF_NAME}"
-      - run: echo "workflow_run head_branch ${{ github.event.workflow_run.head_branch }}"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
 
 #   sleep:
 #     needs: [run]
