@@ -19,7 +19,7 @@ jobs:
           echo "$GITHUB_CONTEXT"
 
   complete:
-    if: github.event.action == 'complete'
+    if: github.event.action == 'completed'
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
