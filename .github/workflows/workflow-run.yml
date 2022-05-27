@@ -10,6 +10,8 @@ on:
 jobs:
   request:
     if: github.event.action == 'requested'
+    env:
+      UNIQUE_ID: ${{ github.run_number }}${{ github.run_attempt }}${{ github.event.workflow_run.id }}
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -17,9 +19,12 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
+          echo "$UNIQUE_ID"
 
   complete:
     if: github.event.action == 'completed'
+    env:
+      UNIQUE_ID: ${{ github.run_number }}${{ github.run_attempt }}${{ github.event.workflow_run.id }}
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -27,6 +32,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
+          echo "$UNIQUE_ID"
           
 #   sleep:
 #     needs: [run]
