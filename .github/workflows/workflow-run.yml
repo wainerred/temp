@@ -8,8 +8,8 @@ on:
       - completed
 
 jobs:
-  run:
-    if: github.event.workflow_run.conclusion == 'success'
+  request:
+    if: github.event.action == 'requested'
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
@@ -18,6 +18,16 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
 
+  complete:
+    if: github.event.action == 'complete'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          
 #   sleep:
 #     needs: [run]
 #     runs-on: ubuntu-latest
