@@ -41,8 +41,8 @@ jobs:
             "${{ github.event.workflow_run.url }}" \
             --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
             
-      - name: Workflow run duration action
-        uses: channyein87/workflow-duration-action@v1
+      - name: Workflow Duration Action
+        uses: channyein87/workflow-duration-action@v1.13
         id: duration
         
       - name: Get the output of duration
