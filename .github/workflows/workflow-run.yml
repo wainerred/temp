@@ -42,7 +42,7 @@ jobs:
             --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
             
       - name: Workflow Duration Action
-        uses: channyein87/workflow-duration-action@v1.13
+        uses: channyein87/workflow-duration-action@v1
         id: duration
         
       - name: Get the output of duration
