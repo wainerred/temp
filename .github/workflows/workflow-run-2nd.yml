@@ -1,0 +1,26 @@
+name: Workflow Run 2nd
+
+on:
+  workflow_run:
+    workflows: [ Workflow Run ]
+    types:
+      - completed
+
+jobs:
+  complete:
+    if: github.event.action == 'completed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          echo "$UNIQUE_ID"
+      
+      - name: Workflow run api
+        run: |
+          curl \
+            -H "Accept: application/vnd.github.v3+json" \
+            "${{ github.event.workflow_run.url }}" \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
