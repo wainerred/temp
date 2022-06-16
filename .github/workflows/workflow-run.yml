@@ -3,18 +3,51 @@ name: Workflow Run
 on:
   workflow_run:
     workflows: [ Environment ]
-    types: [ completed ]
+    types:
+      - requested
+      - completed
 
 jobs:
-  run:
-    if: github.event.workflow_run.conclusion == 'success'
+#   request:
+#     if: github.event.action == 'requested'
+#     env:
+#       UNIQUE_ID: ${{ github.run_number }}${{ github.run_attempt }}${{ github.event.workflow_run.id }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Dump GitHub context
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#         run: |
+#           echo "$GITHUB_CONTEXT"
+#           echo "$UNIQUE_ID"
+
+  complete:
+    if: github.event.action == 'completed'
+    env:
+      UNIQUE_ID: ${{ github.run_number }}${{ github.run_attempt }}${{ github.event.workflow_run.id }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.* }}"
-      - run: echo "workflow_id ${{ github.event.workflow_run.workflow_id }}"
-      - run: echo "github.ref_name is ${{ github.ref_name }}"
-      - run: echo "GITHUB_REF_NAME is ${GITHUB_REF_NAME}"
-
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          echo "$UNIQUE_ID"
+      
+      - name: Workflow run api
+        run: |
+          curl \
+            -H "Accept: application/vnd.github.v3+json" \
+            "${{ github.event.workflow_run.url }}" \
+            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
+            
+      - name: Workflow Duration Action
+        uses: channyein87/workflow-duration-action@v1
+        id: duration
+        
+      - name: Get the output of duration
+        run: echo "The duration is ${{ steps.duration.outputs.duration }} seconds long."
+          
 #   sleep:
 #     needs: [run]
 #     runs-on: ubuntu-latest
@@ -29,18 +62,18 @@ jobs:
 #     steps:
 #       - run: echo "always step..."
 
-  download:
-    runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: dev
-    environment:
-      name: dev
-      url: https://github.com
-    steps:
-      - name: Download Artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: environment.yml
-          workflow_conclusion: success
-          name: ${{ env.ENVIRONMENT }}
+#   download:
+#     runs-on: ubuntu-latest
+#     env:
+#       ENVIRONMENT: dev
+#     environment:
+#       name: dev
+#       url: https://github.com
+#     steps:
+#       - name: Download Artifact
+#         uses: dawidd6/action-download-artifact@v2
+#         with:
+#           github_token: ${{secrets.GITHUB_TOKEN}}
+#           workflow: environment.yml
+#           workflow_conclusion: success
+#           name: ${{ env.ENVIRONMENT }}
